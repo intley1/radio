@@ -1,0 +1,2421 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AMERICANA RADIO</title>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=VT323&family=Courier+Prime:wght@400;700&display=swap");
+
+      *,
+      *::before,
+      *::after {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      :root {
+        --wood: #2a1a0a;
+        --wood2: #3d2710;
+        --wood3: #5c3a1a;
+        --cream: #f0e6c8;
+        --amb: #d4820a;
+        --amb2: #f0a020;
+        --dbg: #120e04;
+        --red: #cc3300;
+        --grn: #44ff88;
+      }
+
+      html,
+      body {
+        width: 100%;
+        min-height: 100vh;
+        background: #5e3500;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: "Courier Prime", monospace;
+        overflow-x: hidden;
+      }
+
+      body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        background:
+          radial-gradient(
+            ellipse at 50% 20%,
+            rgba(80, 50, 20, 0.2) 0%,
+            transparent 65%
+          ),
+          repeating-linear-gradient(
+            0deg,
+            transparent,
+            transparent 3px,
+            rgba(0, 0, 0, 0.05) 3px,
+            rgba(0, 0, 0, 0.05) 4px
+          );
+      }
+
+      /* ── CABINET ── */
+      .cabinet {
+        width: min(1000px, 96vw);
+        filter: drop-shadow(0 30px 70px rgba(0, 0, 0, 0.95));
+        position: relative;
+        z-index: 1;
+      }
+
+      .body {
+        background: linear-gradient(
+          160deg,
+          var(--wood3) 0%,
+          var(--wood2) 45%,
+          var(--wood) 100%
+        );
+        border-radius: 22px 22px 18px 18px;
+        padding: 26px 30px 34px;
+        border: 2px solid rgba(255, 180, 80, 0.1);
+        box-shadow:
+          inset 0 2px 5px rgba(255, 200, 100, 0.07),
+          inset 0 -4px 12px rgba(0, 0, 0, 0.5),
+          0 0 0 1px rgba(0, 0, 0, 0.9);
+        position: relative;
+        overflow: hidden;
+      }
+
+      /* wood grain */
+      .body::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        border-radius: inherit;
+        pointer-events: none;
+        background: repeating-linear-gradient(
+          91deg,
+          transparent,
+          transparent 9px,
+          rgba(255, 170, 60, 0.012) 9px,
+          rgba(255, 170, 60, 0.012) 10px
+        );
+      }
+
+      .chrome {
+        height: 5px;
+        border-radius: 8px;
+        margin-bottom: 18px;
+        background: linear-gradient(
+          90deg,
+          rgba(255, 255, 255, 0.04),
+          rgba(255, 255, 255, 0.3) 40%,
+          rgba(255, 255, 255, 0.4) 50%,
+          rgba(255, 255, 255, 0.3) 60%,
+          rgba(255, 255, 255, 0.04)
+        );
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+      }
+
+      /* ── BRAND ── */
+      .brand {
+        text-align: center;
+        margin-bottom: 14px;
+      }
+      .bname {
+        font-family: "Bebas Neue", sans-serif;
+        font-size: clamp(26px, 5vw, 44px);
+        letter-spacing: 14px;
+        color: var(--cream);
+        text-shadow:
+          0 0 18px rgba(212, 130, 10, 0.5),
+          0 2px 4px rgba(0, 0, 0, 0.8);
+      }
+      .bsub {
+        font-family: "VT323", monospace;
+        font-size: 12px;
+        letter-spacing: 5px;
+        color: rgba(240, 230, 200, 0.3);
+        text-transform: uppercase;
+      }
+
+      /* ── DIAL PANEL ── */
+      .panel {
+        background: var(--dbg);
+        border-radius: 12px;
+        padding: 18px 22px 16px;
+        border: 1.5px solid rgba(255, 160, 60, 0.1);
+        box-shadow:
+          inset 0 4px 20px rgba(0, 0, 0, 0.85),
+          inset 0 1px 2px rgba(255, 160, 60, 0.06),
+          0 0 24px rgba(180, 100, 8, 0.1);
+        position: relative;
+      }
+      .panel::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        border-radius: inherit;
+        pointer-events: none;
+        background: radial-gradient(
+          ellipse at 50% 35%,
+          rgba(212, 130, 10, 0.06) 0%,
+          transparent 65%
+        );
+      }
+
+      /* ── SCALE ── */
+      .scale-wrap {
+        position: relative;
+        height: 64px;
+        margin-bottom: 14px;
+        border-radius: 6px;
+        overflow: hidden;
+        background: linear-gradient(180deg, #0a0700 0%, #160f02 100%);
+      }
+      .scale-wrap::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        z-index: 5;
+        background:
+          linear-gradient(
+            90deg,
+            rgba(0, 0, 0, 0.85) 0%,
+            transparent 12%,
+            transparent 88%,
+            rgba(0, 0, 0, 0.85) 100%
+          ),
+          linear-gradient(180deg, rgba(255, 230, 150, 0.05) 0%, transparent 50%);
+      }
+
+      .scale-tape {
+        position: absolute;
+        top: 0;
+        height: 100%;
+        display: flex;
+        align-items: flex-end;
+        padding-bottom: 6px;
+        will-change: transform;
+      }
+
+      .smark {
+        position: absolute;
+        bottom: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      .sline {
+        background: rgba(240, 190, 80, 0.3);
+        width: 1px;
+        flex-shrink: 0;
+      }
+      .sline.maj {
+        background: rgba(240, 190, 80, 0.7);
+        height: 26px;
+      }
+      .sline.mid {
+        background: rgba(240, 190, 80, 0.4);
+        height: 16px;
+      }
+      .sline.min {
+        background: rgba(240, 190, 80, 0.18);
+        height: 10px;
+      }
+      .slabel {
+        position: absolute;
+        top: 2px;
+        font-family: "VT323", monospace;
+        font-size: 12px;
+        color: rgba(240, 190, 80, 0.65);
+        white-space: nowrap;
+      }
+
+      /* Station dot on scale */
+      .sdot {
+        position: absolute;
+        bottom: 12px;
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: rgba(212, 130, 10, 0.6);
+        box-shadow: 0 0 4px rgba(212, 130, 10, 0.4);
+        transform: translateX(-50%);
+        cursor: pointer;
+        transition: all 0.25s;
+        z-index: 3;
+      }
+      .sdot:hover {
+        background: var(--amb2);
+        box-shadow: 0 0 8px var(--amb2);
+        transform: translateX(-50%) scale(1.4);
+      }
+      .sdot.active {
+        background: var(--grn);
+        box-shadow: 0 0 10px var(--grn);
+        width: 8px;
+        height: 8px;
+        bottom: 11px;
+      }
+
+      /* Needle */
+      .needle {
+        position: absolute;
+        left: 50%;
+        top: 0;
+        bottom: 0;
+        z-index: 10;
+        transform: translateX(-50%);
+        width: 2px;
+        pointer-events: none;
+        background: linear-gradient(
+          180deg,
+          var(--red) 0%,
+          rgba(180, 30, 0, 0.2) 100%
+        );
+        box-shadow:
+          0 0 6px var(--red),
+          0 0 12px rgba(200, 40, 0, 0.35);
+      }
+      .needle::before {
+        content: "";
+        position: absolute;
+        top: -2px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 0;
+        height: 0;
+        border-left: 5px solid transparent;
+        border-right: 5px solid transparent;
+        border-top: 8px solid var(--red);
+        filter: drop-shadow(0 0 4px var(--red));
+      }
+
+      /* ── DISPLAY ── */
+      .display {
+        background: #08060100;
+        border: 1px solid rgba(212, 130, 10, 0.2);
+        border-radius: 7px;
+        padding: 10px 14px 22px;
+        margin-bottom: 14px;
+        position: relative;
+        overflow: hidden;
+        background: linear-gradient(135deg, #0c0900 0%, #100b01 100%);
+        min-height: 62px;
+      }
+      .display::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        background: radial-gradient(
+          ellipse at 25% 50%,
+          rgba(40, 25, 0, 0.7) 0%,
+          transparent 70%
+        );
+      }
+
+      .drow {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        position: relative;
+      }
+
+      .dfreq {
+        font-family: "VT323", monospace;
+        font-size: 36px;
+        line-height: 1;
+        color: var(--amb2);
+        min-width: 84px;
+        flex-shrink: 0;
+        text-shadow:
+          0 0 12px var(--amb),
+          0 0 24px rgba(212, 130, 10, 0.35);
+      }
+
+      .dinfo {
+        flex: 1;
+        overflow: hidden;
+      }
+      .dcall {
+        font-family: "Bebas Neue", sans-serif;
+        font-size: 19px;
+        color: var(--cream);
+        letter-spacing: 3px;
+        text-shadow: 0 0 8px rgba(240, 230, 200, 0.25);
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      .dgenre {
+        font-family: "VT323", monospace;
+        font-size: 13px;
+        color: rgba(212, 130, 10, 0.75);
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        margin-top: 1px;
+      }
+      .dcity {
+        font-size: 9px;
+        color: rgba(240, 230, 200, 0.28);
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        margin-top: 2px;
+      }
+
+      .dright {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 6px;
+        flex-shrink: 0;
+      }
+
+      .onair {
+        font-family: "VT323", monospace;
+        font-size: 11px;
+        letter-spacing: 3px;
+        color: rgba(255, 60, 40, 0.9);
+        text-shadow: 0 0 7px rgba(255, 50, 30, 0.7);
+        border: 1px solid rgba(255, 60, 40, 0.35);
+        padding: 2px 6px;
+        border-radius: 3px;
+        background: rgba(255, 50, 30, 0.07);
+      }
+      @keyframes blink {
+        0%,
+        100% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0.3;
+        }
+      }
+      .onair.live {
+        animation: blink 1.3s ease-in-out infinite;
+      }
+      .onair.off {
+        opacity: 0;
+      }
+
+      .sigbars {
+        display: flex;
+        gap: 2px;
+        align-items: flex-end;
+        height: 22px;
+      }
+      .sbar {
+        width: 5px;
+        border-radius: 1px;
+        background: rgba(68, 255, 136, 0.12);
+        transition: all 0.3s;
+      }
+      .sbar.lit {
+        background: var(--grn);
+        box-shadow: 0 0 4px var(--grn);
+      }
+
+      /* wave viz */
+      .waveviz {
+        display: flex;
+        gap: 2px;
+        align-items: center;
+        height: 22px;
+      }
+      @keyframes wv {
+        0%,
+        100% {
+          transform: scaleY(0.1);
+        }
+        50% {
+          transform: scaleY(1);
+        }
+      }
+      .wbar {
+        width: 3px;
+        border-radius: 2px;
+        background: var(--amb);
+        box-shadow: 0 0 3px var(--amb);
+        transform-origin: center;
+      }
+      .wbar.on {
+        animation: wv var(--d, 0.5s) ease-in-out infinite var(--dl, 0s);
+      }
+
+      /* marquee */
+      .mq {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 16px;
+        background: rgba(0, 0, 0, 0.5);
+        overflow: hidden;
+      }
+      @keyframes mq {
+        from {
+          transform: translateX(100%);
+        }
+        to {
+          transform: translateX(-100%);
+        }
+      }
+      .mqtext {
+        font-family: "VT323", monospace;
+        font-size: 12px;
+        letter-spacing: 2px;
+        color: rgba(212, 130, 10, 0.55);
+        white-space: nowrap;
+        display: inline-block;
+        animation: mq 28s linear infinite;
+      }
+
+      /* loading bar */
+      .loadbar {
+        height: 2px;
+        border-radius: 1px;
+        overflow: hidden;
+        opacity: 0;
+        transition: opacity 0.3s;
+        margin-bottom: 10px;
+      }
+      .loadbar.show {
+        opacity: 1;
+      }
+      @keyframes lsweep {
+        from {
+          margin-left: -35%;
+        }
+        to {
+          margin-left: 100%;
+        }
+      }
+      .loadfill {
+        height: 100%;
+        width: 35%;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          var(--amb2),
+          transparent
+        );
+        animation: lsweep 1.1s ease-in-out infinite;
+      }
+
+      /* ── KNOBS ── */
+      .knobs-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 8px;
+        margin-top: 4px;
+      }
+
+      .kgroup {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 7px;
+        user-select: none;
+      }
+      .klabel {
+        font-family: "VT323", monospace;
+        font-size: 12px;
+        letter-spacing: 3px;
+        color: rgba(240, 190, 80, 0.45);
+        text-transform: uppercase;
+      }
+      .kval {
+        font-family: "VT323", monospace;
+        font-size: 14px;
+        color: rgba(212, 130, 10, 0.65);
+        letter-spacing: 2px;
+      }
+
+      .knob {
+        border-radius: 50%;
+        position: relative;
+        cursor: grab;
+        touch-action: none;
+        width: 64px;
+        height: 64px;
+      }
+      .knob.big {
+        width: 88px;
+        height: 88px;
+      }
+      .knob:active {
+        cursor: grabbing;
+      }
+
+      .kbody {
+        position: absolute;
+        inset: 0;
+        border-radius: 50%;
+        background:
+          radial-gradient(
+            circle at 33% 28%,
+            rgba(255, 255, 255, 0.13) 0%,
+            rgba(255, 255, 255, 0.04) 30%,
+            transparent 55%
+          ),
+          linear-gradient(145deg, #2e2212 0%, #1a1308 55%, #0d0b05 100%);
+        border: 2px solid rgba(180, 110, 30, 0.28);
+        box-shadow:
+          0 6px 18px rgba(0, 0, 0, 0.85),
+          0 2px 4px rgba(0, 0, 0, 0.6),
+          inset 0 1px 3px rgba(255, 190, 60, 0.05);
+      }
+      .kbody::after {
+        content: "";
+        position: absolute;
+        inset: 4px;
+        border-radius: 50%;
+        border: 1px solid rgba(255, 180, 60, 0.05);
+      }
+      .knob:active .kbody {
+        box-shadow:
+          0 3px 12px rgba(0, 0, 0, 0.8),
+          0 0 18px rgba(212, 120, 8, 0.18),
+          inset 0 1px 3px rgba(255, 190, 60, 0.08);
+      }
+
+      .kdot {
+        position: absolute;
+        left: 50%;
+        width: 3px;
+        height: 14px;
+        top: 7px;
+        background: linear-gradient(180deg, var(--amb2), var(--amb));
+        border-radius: 2px;
+        box-shadow: 0 0 5px var(--amb);
+        transform-origin: 50% calc(32px - 7px);
+        transform: translateX(-50%) rotate(0deg);
+      }
+      .knob.big .kdot {
+        width: 4px;
+        height: 18px;
+        top: 9px;
+        transform-origin: 50% calc(44px - 9px);
+      }
+
+      /* ── GRILLE ── */
+      .grille {
+        display: grid;
+        grid-template-columns: repeat(18, 1fr);
+        gap: 4px;
+        margin-top: 16px;
+        padding: 12px 8px;
+        background: rgba(0, 0, 0, 0.28);
+        border-radius: 10px;
+        border: 1px solid rgba(255, 160, 60, 0.05);
+      }
+      .ghole {
+        aspect-ratio: 1;
+        border-radius: 50%;
+        background: rgba(0, 0, 0, 0.72);
+        box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.95);
+        transition:
+          background 0.4s,
+          box-shadow 0.4s;
+      }
+      @keyframes gp {
+        0%,
+        100% {
+          background: rgba(0, 0, 0, 0.72);
+        }
+        50% {
+          background: rgba(22, 14, 3, 0.8);
+          box-shadow:
+            inset 0 1px 2px rgba(0, 0, 0, 0.8),
+            0 0 2px rgba(200, 90, 0, 0.12);
+        }
+      }
+      .ghole.pulse {
+        animation: gp var(--gd, 0.5s) ease-in-out infinite var(--gdl, 0s);
+      }
+
+      .chrome-bot {
+        height: 4px;
+        border-radius: 0 0 8px 8px;
+        margin-top: 18px;
+        background: linear-gradient(
+          90deg,
+          rgba(255, 255, 255, 0.03),
+          rgba(255, 255, 255, 0.18) 40%,
+          rgba(255, 255, 255, 0.25) 50%,
+          rgba(255, 255, 255, 0.18) 60%,
+          rgba(255, 255, 255, 0.03)
+        );
+      }
+
+      .feet {
+        display: flex;
+        justify-content: space-between;
+        padding: 0 22px;
+      }
+      .foot {
+        width: 38px;
+        height: 9px;
+        background: linear-gradient(180deg, #1a1208, #0d0904);
+        border-radius: 0 0 5px 5px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.8);
+      }
+
+      /* ── VINYL CREDIT ── */
+      .vinyl-wrap {
+        display: flex;
+        justify-content: center;
+        margin-top: 28px;
+        position: relative;
+        z-index: 1;
+      }
+
+      .vinyl {
+        position: relative;
+        width: 180px;
+        height: 180px;
+        border-radius: 50%;
+        background: radial-gradient(
+          circle at 50% 50%,
+          #1a1208 0%,
+          #0e0c06 18%,
+          #1c1609 19%,
+          #0a0804 32%,
+          #181309 33%,
+          #0c0a05 46%,
+          #161108 47%,
+          #0d0b04 60%,
+          #141009 61%,
+          #0b0903 74%,
+          #120e07 75%,
+          #090704 88%,
+          #100d06 89%,
+          #080603 100%
+        );
+        box-shadow:
+          0 18px 60px rgba(0, 0, 0, 0.95),
+          0 6px 20px rgba(0, 0, 0, 0.8),
+          inset 0 0 40px rgba(0, 0, 0, 0.5);
+        animation: vinyl-spin 4s linear infinite paused;
+        cursor: default;
+      }
+      .vinyl.spinning {
+        animation-play-state: running;
+      }
+
+      /* Groove shimmer */
+      .vinyl::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        border-radius: 50%;
+        pointer-events: none;
+        background: conic-gradient(
+          rgba(255, 210, 100, 0.03) 0deg,
+          transparent 15deg,
+          rgba(255, 210, 100, 0.05) 30deg,
+          transparent 45deg,
+          rgba(255, 210, 100, 0.03) 60deg,
+          transparent 75deg,
+          rgba(255, 210, 100, 0.04) 90deg,
+          transparent 105deg,
+          rgba(255, 210, 100, 0.03) 120deg,
+          transparent 135deg,
+          rgba(255, 210, 100, 0.05) 150deg,
+          transparent 165deg,
+          rgba(255, 210, 100, 0.03) 180deg,
+          transparent 195deg,
+          rgba(255, 210, 100, 0.04) 210deg,
+          transparent 225deg,
+          rgba(255, 210, 100, 0.03) 240deg,
+          transparent 255deg,
+          rgba(255, 210, 100, 0.05) 270deg,
+          transparent 285deg,
+          rgba(255, 210, 100, 0.03) 300deg,
+          transparent 315deg,
+          rgba(255, 210, 100, 0.04) 330deg,
+          transparent 345deg,
+          rgba(255, 210, 100, 0.03) 360deg
+        );
+        mix-blend-mode: screen;
+      }
+
+      /* Centre label */
+      .vinyl-label {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 72px;
+        height: 72px;
+        border-radius: 50%;
+        background: radial-gradient(
+          circle at 40% 36%,
+          #5c3a1a 0%,
+          #3d2710 55%,
+          #2a1a0a 100%
+        );
+        border: 1.5px solid rgba(180, 110, 30, 0.4);
+        box-shadow:
+          0 2px 10px rgba(0, 0, 0, 0.7),
+          inset 0 1px 3px rgba(255, 190, 60, 0.08);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 2px;
+        padding: 6px;
+        overflow: hidden;
+      }
+
+      /* Spindle hole */
+      .vinyl-label::after {
+        content: "";
+        position: absolute;
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: #050402;
+        box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.9);
+      }
+
+      .vl-top {
+        font-family: "VT323", monospace;
+        font-size: 7px;
+        letter-spacing: 3px;
+        color: rgba(240, 190, 80, 0.5);
+        text-transform: uppercase;
+      }
+      .vl-name {
+        font-family: "Bebas Neue", sans-serif;
+        font-size: 11px;
+        letter-spacing: 2px;
+        color: var(--cream);
+        text-align: center;
+        line-height: 1.1;
+        text-shadow: 0 0 8px rgba(240, 200, 100, 0.2);
+      }
+      .vl-sub {
+        font-family: "VT323", monospace;
+        font-size: 7px;
+        letter-spacing: 1px;
+        color: rgba(212, 130, 10, 0.55);
+        text-transform: uppercase;
+        text-align: center;
+        margin-top: 1px;
+      }
+      .vl-year {
+        font-family: "VT323", monospace;
+        font-size: 8px;
+        letter-spacing: 2px;
+        color: rgba(240, 190, 80, 0.35);
+      }
+
+      @keyframes vinyl-spin {
+        from {
+          transform: rotate(0deg);
+        }
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      /* Tonearm */
+      .tonearm-wrap {
+        position: absolute;
+        top: -10px;
+        right: -22px;
+        width: 70px;
+        height: 100px;
+        pointer-events: none;
+      }
+      .tonearm {
+        position: absolute;
+        top: 0;
+        right: 8px;
+        width: 4px;
+        height: 82px;
+        background: linear-gradient(
+          180deg,
+          rgba(255, 255, 255, 0.35) 0%,
+          rgba(180, 140, 60, 0.4) 40%,
+          rgba(100, 70, 20, 0.3) 100%
+        );
+        border-radius: 2px;
+        transform-origin: top center;
+        transform: rotate(28deg);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+        transition: transform 1.2s cubic-bezier(0.25, 0.8, 0.25, 1);
+      }
+      .vinyl.spinning ~ .tonearm-wrap .tonearm,
+      .tonearm.on {
+        transform: rotate(22deg);
+      }
+      .tonearm::after {
+        content: "";
+        position: absolute;
+        bottom: -4px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: radial-gradient(
+          circle at 35% 30%,
+          rgba(255, 230, 100, 0.4),
+          rgba(100, 70, 0, 0.6)
+        );
+        box-shadow: 0 0 4px rgba(200, 130, 0, 0.5);
+      }
+      .pivot {
+        position: absolute;
+        top: -2px;
+        right: 4px;
+        width: 14px;
+        height: 14px;
+        border-radius: 50%;
+        background: radial-gradient(
+          circle at 38% 32%,
+          rgba(255, 255, 255, 0.25),
+          #2a1a0a 70%
+        );
+        border: 1.5px solid rgba(180, 110, 30, 0.45);
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.7);
+      }
+
+      .lamp-wrap {
+        position: absolute;
+        top: 18px;
+        right: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 5px;
+        z-index: 50;
+      }
+      .lamp {
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        cursor: pointer;
+        border: 2px solid rgba(140, 60, 0, 0.45);
+        box-shadow:
+          0 2px 8px rgba(0, 0, 0, 0.8),
+          inset 0 1px 2px rgba(0, 0, 0, 0.6);
+        transition: all 0.3s;
+        position: relative;
+        background: radial-gradient(
+          circle at 38% 32%,
+          rgba(255, 255, 255, 0.1),
+          #1a0800 70%
+        );
+      }
+      .lamp.on {
+        background: radial-gradient(
+          circle at 38% 32%,
+          #ffee88 0%,
+          #ff8800 40%,
+          #a04000 100%
+        );
+        box-shadow:
+          0 0 12px rgba(255, 160, 0, 0.9),
+          0 0 28px rgba(255, 100, 0, 0.55),
+          0 2px 6px rgba(0, 0, 0, 0.5);
+        animation: lpulse 2s ease-in-out infinite;
+      }
+      @keyframes lpulse {
+        0%,
+        100% {
+          box-shadow:
+            0 0 12px rgba(255, 160, 0, 0.85),
+            0 0 26px rgba(255, 100, 0, 0.5);
+        }
+        50% {
+          box-shadow:
+            0 0 18px rgba(255, 190, 0, 1),
+            0 0 40px rgba(255, 130, 0, 0.75);
+        }
+      }
+      .lamp-lbl {
+        font-family: "VT323", monospace;
+        font-size: 9px;
+        letter-spacing: 2px;
+        color: rgba(240, 180, 70, 0.3);
+        text-transform: uppercase;
+      }
+
+      /* ── STATION LIST MODAL ── */
+      .modal-overlay {
+        position: fixed;
+        inset: 0;
+        z-index: 300;
+        background: rgba(0, 0, 0, 0.7);
+        backdrop-filter: blur(4px);
+        display: none;
+        align-items: center;
+        justify-content: center;
+      }
+      .modal-overlay.open {
+        display: flex;
+        animation: mfade 0.2s ease;
+      }
+      @keyframes mfade {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+      .modal-box {
+        background: linear-gradient(160deg, #1e1408, #100c03);
+        border: 1.5px solid rgba(212, 130, 10, 0.28);
+        border-radius: 12px;
+        width: min(460px, 92vw);
+        max-height: 80vh;
+        display: flex;
+        flex-direction: column;
+        box-shadow:
+          0 24px 70px rgba(0, 0, 0, 0.95),
+          0 0 50px rgba(200, 90, 0, 0.09);
+        overflow: hidden;
+        animation: mup 0.25s cubic-bezier(0.25, 0.8, 0.25, 1);
+      }
+      @keyframes mup {
+        from {
+          transform: translateY(22px);
+          opacity: 0;
+        }
+        to {
+          transform: translateY(0);
+          opacity: 1;
+        }
+      }
+      .modal-head {
+        padding: 14px 18px;
+        border-bottom: 1px solid rgba(212, 130, 10, 0.14);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-shrink: 0;
+      }
+      .modal-title {
+        font-family: "Bebas Neue", sans-serif;
+        font-size: 20px;
+        letter-spacing: 7px;
+        color: var(--cream);
+        text-shadow: 0 0 14px rgba(212, 130, 10, 0.35);
+      }
+      .modal-close {
+        width: 28px;
+        height: 28px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        color: rgba(240, 230, 200, 0.45);
+        font-size: 15px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.18s;
+      }
+      .modal-close:hover {
+        background: rgba(255, 70, 30, 0.14);
+        border-color: rgba(255, 70, 30, 0.3);
+        color: rgba(255, 110, 70, 0.9);
+      }
+      .modal-scroll {
+        overflow-y: auto;
+        flex: 1;
+        padding: 6px 0;
+      }
+      .modal-scroll::-webkit-scrollbar {
+        width: 4px;
+      }
+      .modal-scroll::-webkit-scrollbar-thumb {
+        background: rgba(212, 130, 10, 0.28);
+        border-radius: 2px;
+      }
+      .strow {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 10px 18px;
+        cursor: pointer;
+        border-bottom: 1px solid rgba(255, 150, 30, 0.04);
+        transition: background 0.14s;
+        position: relative;
+      }
+      .strow:hover {
+        background: rgba(212, 130, 10, 0.08);
+      }
+      .strow.active {
+        background: rgba(68, 255, 136, 0.05);
+      }
+      .strow.active::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        width: 3px;
+        background: var(--grn);
+        border-radius: 0 2px 2px 0;
+        box-shadow: 0 0 8px var(--grn);
+      }
+      .strow-freq {
+        font-family: "VT323", monospace;
+        font-size: 20px;
+        color: var(--amb2);
+        min-width: 52px;
+        text-align: right;
+        flex-shrink: 0;
+        text-shadow: 0 0 8px rgba(212, 130, 10, 0.35);
+      }
+      .strow.active .strow-freq {
+        color: var(--grn);
+        text-shadow: 0 0 10px rgba(68, 255, 136, 0.5);
+      }
+      .strow-info {
+        flex: 1;
+        overflow: hidden;
+      }
+      .strow-call {
+        font-family: "Bebas Neue", sans-serif;
+        font-size: 16px;
+        color: var(--cream);
+        letter-spacing: 2px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      .strow.active .strow-call {
+        color: var(--grn);
+      }
+      .strow-genre {
+        font-family: "VT323", monospace;
+        font-size: 12px;
+        color: rgba(212, 130, 10, 0.6);
+        letter-spacing: 2px;
+        text-transform: uppercase;
+      }
+      .strow-city {
+        font-size: 9px;
+        color: rgba(240, 230, 200, 0.22);
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        margin-top: 1px;
+      }
+      .strow-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        flex-shrink: 0;
+        background: rgba(255, 255, 255, 0.08);
+        transition: all 0.2s;
+      }
+      .strow.active .strow-dot {
+        background: var(--grn);
+        box-shadow: 0 0 8px var(--grn);
+      }
+
+      /* ── STATION NAME ON SCALE ── */
+      .sname {
+        position: absolute;
+        font-family: "VT323", monospace;
+        font-size: 10px;
+        color: rgba(240, 160, 40, 0.5);
+        white-space: nowrap;
+        transform: translateX(-50%);
+        pointer-events: none;
+        letter-spacing: 0.3px;
+        top: 4px;
+      }
+      .sname.cur {
+        color: rgba(68, 255, 136, 0.85);
+        text-shadow: 0 0 6px rgba(68, 255, 136, 0.4);
+      }
+
+      /* CRT scanlines */
+      body::after {
+        content: "";
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        z-index: 9999;
+        background: repeating-linear-gradient(
+          0deg,
+          transparent,
+          transparent 1px,
+          rgba(0, 0, 0, 0.055) 1px,
+          rgba(0, 0, 0, 0.055) 2px
+        );
+      }
+
+      /* ── PLAY / PAUSE BUTTONS 50s style ── */
+      /* transport-row merged into knobs-row */
+
+      .t-btn {
+        position: relative;
+        cursor: pointer;
+        user-select: none;
+        border: none;
+        outline: none;
+        background: none;
+        padding: 0;
+      }
+
+      /* Outer chrome ring */
+      .t-btn-ring {
+        width: 62px;
+        height: 62px;
+        border-radius: 50%;
+        background: linear-gradient(
+          145deg,
+          rgba(255, 255, 255, 0.28) 0%,
+          rgba(120, 70, 10, 0.2) 55%,
+          rgba(0, 0, 0, 0.5) 100%
+        );
+        box-shadow:
+          0 5px 14px rgba(0, 0, 0, 0.85),
+          0 2px 4px rgba(0, 0, 0, 0.7),
+          inset 0 1px 3px rgba(255, 220, 100, 0.18),
+          inset 0 -2px 6px rgba(0, 0, 0, 0.6);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.1s;
+      }
+
+      /* Bakelite face */
+      .t-btn-face {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        transition: all 0.1s;
+      }
+
+      .t-btn.play .t-btn-face {
+        background: radial-gradient(
+          circle at 36% 32%,
+          #3d2710 0%,
+          #2a1a0a 50%,
+          #160d04 100%
+        );
+        border: 2px solid rgba(180, 110, 30, 0.35);
+        box-shadow:
+          inset 0 2px 8px rgba(0, 0, 0, 0.65),
+          0 0 8px rgba(120, 60, 0, 0.2);
+      }
+      .t-btn.pause .t-btn-face {
+        background: radial-gradient(
+          circle at 36% 32%,
+          #3d2710 0%,
+          #2a1a0a 50%,
+          #160d04 100%
+        );
+        border: 2px solid rgba(180, 110, 30, 0.35);
+        box-shadow:
+          inset 0 2px 8px rgba(0, 0, 0, 0.65),
+          0 0 8px rgba(120, 60, 0, 0.2);
+      }
+
+      /* Engraved icon */
+      .t-btn .icon {
+        position: relative;
+        z-index: 2;
+        filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.9));
+        transition: transform 0.1s;
+      }
+      .t-btn.play .icon {
+        width: 0;
+        height: 0;
+        margin-left: 4px;
+        border-top: 12px solid transparent;
+        border-bottom: 12px solid transparent;
+        border-left: 20px solid rgba(212, 130, 10, 0.7);
+        filter: drop-shadow(0 0 5px rgba(200, 110, 0, 0.4))
+          drop-shadow(0 1px 2px rgba(0, 0, 0, 0.9));
+      }
+      .t-btn.pause .icon {
+        display: flex;
+        gap: 6px;
+      }
+      .t-btn.pause .icon span {
+        display: block;
+        width: 6px;
+        height: 22px;
+        border-radius: 2px;
+        background: rgba(212, 130, 10, 0.7);
+        box-shadow: 0 0 5px rgba(180, 100, 0, 0.35);
+      }
+
+      /* Engraved label */
+      .t-btn-label {
+        font-family: "VT323", monospace;
+        font-size: 11px;
+        letter-spacing: 4px;
+        text-transform: uppercase;
+        margin-top: 6px;
+        text-align: center;
+        color: rgba(240, 190, 80, 0.35);
+      }
+
+      /* Press state */
+      .t-btn:active .t-btn-ring {
+        box-shadow:
+          0 2px 8px rgba(0, 0, 0, 0.9),
+          inset 0 2px 6px rgba(0, 0, 0, 0.7);
+        transform: translateY(2px);
+      }
+      .t-btn:active .t-btn-face {
+        box-shadow: inset 0 4px 12px rgba(0, 0, 0, 0.8);
+      }
+
+      /* Lit up when active — amber glow matching the radio dials */
+      .t-btn.play.active .t-btn-face {
+        background: radial-gradient(
+          circle at 36% 32%,
+          #7a4500 0%,
+          #4a2800 45%,
+          #2a1400 100%
+        );
+        box-shadow:
+          inset 0 2px 8px rgba(0, 0, 0, 0.4),
+          0 0 16px rgba(212, 130, 10, 0.7),
+          0 0 36px rgba(180, 90, 0, 0.35);
+      }
+      .t-btn.play.active .icon {
+        border-left-color: var(--amb2);
+        filter: drop-shadow(0 0 8px rgba(240, 160, 20, 0.9))
+          drop-shadow(0 1px 2px rgba(0, 0, 0, 0.9));
+      }
+      .t-btn.pause.active .t-btn-face {
+        background: radial-gradient(
+          circle at 36% 32%,
+          #7a4500 0%,
+          #4a2800 45%,
+          #2a1400 100%
+        );
+        box-shadow:
+          inset 0 2px 8px rgba(0, 0, 0, 0.4),
+          0 0 16px rgba(212, 130, 10, 0.7),
+          0 0 36px rgba(180, 90, 0, 0.35);
+      }
+      .t-btn.pause.active .icon span {
+        background: var(--amb2);
+        box-shadow: 0 0 10px rgba(240, 160, 20, 0.8);
+      }
+
+      /* Separator pip between buttons */
+      .t-sep {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: rgba(212, 130, 10, 0.2);
+        box-shadow: 0 0 4px rgba(180, 90, 0, 0.15);
+      }
+
+      @media (max-width: 480px) {
+        .body {
+          padding: 16px 14px 22px;
+        }
+        .panel {
+          padding: 12px 12px 10px;
+        }
+        .grille {
+          grid-template-columns: repeat(10, 1fr);
+        }
+        .knob {
+          width: 52px;
+          height: 52px;
+        }
+        .knob.big {
+          width: 72px;
+          height: 72px;
+        }
+        .kdot {
+          transform-origin: 50% calc(26px - 7px);
+        }
+        .knob.big .kdot {
+          transform-origin: 50% calc(36px - 9px);
+        }
+        .t-btn-ring {
+          width: 52px;
+          height: 52px;
+        }
+        .t-btn-face {
+          width: 44px;
+          height: 44px;
+        }
+      }
+
+      /* ── ADD STATION FORM ── */
+      .add-station-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        width: calc(100% - 36px);
+        margin: 10px 18px 6px;
+        padding: 10px 16px;
+        background: transparent;
+        border: 1px dashed rgba(212,130,10,.35);
+        border-radius: 6px;
+        color: rgba(212,130,10,.7);
+        font-family: 'VT323', monospace;
+        font-size: 15px;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        cursor: pointer;
+        transition: all .18s;
+        flex-shrink: 0;
+      }
+      .add-station-btn:hover {
+        border-color: var(--amb2);
+        color: var(--amb2);
+        background: rgba(212,130,10,.06);
+      }
+
+      .add-form {
+        display: none;
+        flex-direction: column;
+        gap: 10px;
+        padding: 14px 18px 16px;
+        border-top: 1px solid rgba(212,130,10,.12);
+        background: rgba(0,0,0,.3);
+        flex-shrink: 0;
+      }
+      .add-form.open { display: flex; animation: mfade .2s ease; }
+      .add-form-title {
+        font-family: 'Bebas Neue', sans-serif;
+        font-size: 15px;
+        letter-spacing: 5px;
+        color: var(--amb2);
+        margin-bottom: 2px;
+      }
+      .add-row {
+        display: flex;
+        gap: 8px;
+      }
+      .add-input {
+        flex: 1;
+        background: rgba(255,255,255,.04);
+        border: 1px solid rgba(212,130,10,.25);
+        border-radius: 5px;
+        color: var(--cream);
+        font-family: 'Courier Prime', monospace;
+        font-size: 12px;
+        padding: 8px 11px;
+        outline: none;
+        transition: border-color .15s;
+        min-width: 0;
+      }
+      .add-input:focus { border-color: rgba(212,130,10,.6); }
+      .add-input::placeholder { color: rgba(240,200,100,.2); }
+      .add-input.url { font-size: 11px; }
+      .add-input.narrow { flex: 0 0 80px; }
+      .add-submit {
+        background: rgba(212,130,10,.15);
+        border: 1px solid rgba(212,130,10,.4);
+        border-radius: 5px;
+        color: var(--amb2);
+        font-family: 'VT323', monospace;
+        font-size: 15px;
+        letter-spacing: 3px;
+        padding: 8px 16px;
+        cursor: pointer;
+        transition: all .15s;
+        white-space: nowrap;
+      }
+      .add-submit:hover { background: rgba(212,130,10,.28); border-color: var(--amb2); }
+      .add-msg {
+        font-family: 'VT323', monospace;
+        font-size: 13px;
+        letter-spacing: 2px;
+        min-height: 18px;
+        transition: color .2s;
+      }
+      .add-msg.ok  { color: var(--grn); }
+      .add-msg.err { color: #ff6644; }
+      .strow-del {
+        width: 20px; height: 20px; border-radius: 50%;
+        background: transparent;
+        border: 1px solid rgba(255,80,40,.2);
+        color: rgba(255,80,40,.4);
+        font-size: 12px; cursor: pointer;
+        display: flex; align-items: center; justify-content: center;
+        flex-shrink: 0; margin-left: 4px;
+        transition: all .15s;
+      }
+      .strow-del:hover { background: rgba(255,80,40,.12); border-color: rgba(255,80,40,.6); color: rgba(255,100,60,.9); }
+      .strow-del.hidden { display: none; }
+    </style>
+  </head>
+  <body>
+    <div class="cabinet">
+      <div class="body">
+        <div class="chrome"></div>
+
+        <!-- Lamp button -->
+        <div class="lamp-wrap" id="lampWrap">
+          <div
+            class="lamp idle"
+            id="lamp"
+            onclick="toggleModal()"
+            title="Station list"
+          ></div>
+          <div class="lamp-lbl">STNS</div>
+        </div>
+
+        <div class="brand">
+          <div class="bname">Americana Radio</div>
+          <div class="bsub">· Live USA & Internet Stations ·</div>
+        </div>
+
+        <div class="panel">
+          <!-- Frequency scale -->
+          <div class="scale-wrap" id="scaleWrap">
+            <div class="scale-tape" id="scaleTape"></div>
+            <div class="needle"></div>
+          </div>
+
+          <div class="loadbar" id="loadbar"><div class="loadfill"></div></div>
+
+          <!-- Station display -->
+          <div class="display">
+            <div class="drow">
+              <div class="dfreq" id="dfreq">—</div>
+              <div class="dinfo">
+                <div class="dcall" id="dcall">ROTATE THE TUNING KNOB</div>
+                <div class="dgenre" id="dgenre">· · · · · · · · ·</div>
+                <div class="dcity" id="dcity">24 live stations ready</div>
+              </div>
+              <div class="dright">
+                <div class="onair off" id="onair">ON AIR</div>
+                <div class="waveviz" id="waveviz"></div>
+                <div class="sigbars" id="sigbars"></div>
+              </div>
+            </div>
+            <div class="mq">
+              <span class="mqtext" id="mqtext"
+                >· · · AMERICANA RADIO · ROTATE DIAL TO TUNE · LIVE STATIONS · ·
+                ·</span
+              >
+            </div>
+          </div>
+
+          <!-- Controls — single row: vol · play · tune · pause · treble -->
+          <div class="knobs-row">
+            <div class="kgroup">
+              <div class="klabel">Volume</div>
+              <div class="knob" id="kVol">
+                <div class="kbody"></div>
+                <div class="kdot" id="dVol"></div>
+              </div>
+              <div class="kval" id="vVol">75</div>
+            </div>
+
+            <div class="kgroup">
+              <button class="t-btn play" id="btnPlay" title="Play" onclick="handlePlay()">
+                <div class="t-btn-ring"><div class="t-btn-face"><div class="icon"></div></div></div>
+              </button>
+              <div class="t-btn-label">Play</div>
+            </div>
+
+            <div class="kgroup">
+              <div class="klabel">Tuning</div>
+              <div class="knob big" id="kTune">
+                <div class="kbody"></div>
+                <div class="kdot" id="dTune"></div>
+              </div>
+              <div class="kval" id="vTune">FM</div>
+            </div>
+
+            <div class="kgroup">
+              <button class="t-btn pause" id="btnPause" title="Pause" onclick="handlePause()">
+                <div class="t-btn-ring"><div class="t-btn-face"><div class="icon"><span></span><span></span></div></div></div>
+              </button>
+              <div class="t-btn-label">Pause</div>
+            </div>
+
+            <div class="kgroup">
+              <div class="klabel">Treble</div>
+              <div class="knob" id="kTreb">
+                <div class="kbody"></div>
+                <div class="kdot" id="dTreb"></div>
+              </div>
+              <div class="kval" id="vTreb">50</div>
+            </div>
+          </div>
+        </div>
+        <!-- /panel -->
+
+        <div class="grille" id="grille"></div>
+        <div class="chrome-bot"></div>
+      </div>
+      <div class="feet">
+        <div class="foot"></div>
+        <div class="foot"></div>
+      </div>
+    </div>
+
+    <!-- Single audio element — no crossOrigin attr here, set in JS before src -->
+
+    <!-- Station list modal -->
+    <div
+      class="modal-overlay"
+      id="modalOverlay"
+      onclick="closeModalIfBg(event)"
+    >
+      <div class="modal-box">
+        <div class="modal-head">
+          <div class="modal-title">Stations</div>
+          <div class="modal-close" onclick="toggleModal()">✕</div>
+        </div>
+        <div class="modal-scroll" id="modalScroll"></div>
+        <button class="add-station-btn" onclick="toggleAddForm()">＋ ADD STATION</button>
+        <div class="add-form" id="addForm">
+          <div class="add-form-title">New Station</div>
+          <div class="add-row">
+            <input class="add-input" id="addName" placeholder="Station name" maxlength="32">
+            <input class="add-input narrow" id="addFreq" placeholder="FM freq" type="number" min="87" max="108" step="0.1">
+          </div>
+          <div class="add-row">
+            <input class="add-input url" id="addUrl" placeholder="Stream URL  (https://...mp3 or .aac)" type="url">
+          </div>
+          <div class="add-row">
+            <input class="add-input" id="addGenre" placeholder="Genre (optional)" maxlength="30">
+            <input class="add-input" id="addCity" placeholder="City (optional)" maxlength="24">
+          </div>
+          <div class="add-row">
+            <button class="add-submit" onclick="submitAddStation()">TRANSMIT</button>
+          </div>
+          <div class="add-msg" id="addMsg"></div>
+        </div>
+      </div>
+    </div>
+
+    <audio id="audio"></audio>
+
+    <script>
+      // ══════════════════════════════════════
+      //  ALL SOMA FM STREAMS — CORS CONFIRMED
+      //  Access-Control-Allow-Origin: *
+      // ══════════════════════════════════════
+      const STATIONS = [
+        {
+          freq: 88.1,
+          call: "KEXP Seattle",
+          genre: "Indie / Alternative",
+          city: "Seattle, WA",
+          url: "https://kexp-mp3-128.streamguys1.com/kexp128.mp3",
+        },
+        {
+          freq: 89.5,
+          call: "Groove Salad",
+          genre: "Ambient / Electronica",
+          city: "SomaFM",
+          url: "https://ice6.somafm.com/groovesalad-128-mp3",
+        },
+        {
+          freq: 90.3,
+          call: "Space Station",
+          genre: "Space Ambient",
+          city: "SomaFM",
+          url: "https://ice6.somafm.com/spacestation-128-mp3",
+        },
+        {
+          freq: 91.1,
+          call: "Lush",
+          genre: "Chillout Pop",
+          city: "SomaFM",
+          url: "https://ice6.somafm.com/lush-128-mp3",
+        },
+        {
+          freq: 91.9,
+          call: "Drone Zone",
+          genre: "Drone / Ambient",
+          city: "SomaFM",
+          url: "https://ice6.somafm.com/dronezone-128-mp3",
+        },
+        {
+          freq: 92.7,
+          call: "Underground 80s",
+          genre: "Post-Punk / New Wave",
+          city: "SomaFM",
+          url: "https://ice6.somafm.com/u80s-128-mp3",
+        },
+        {
+          freq: 93.5,
+          call: "Cover Songs",
+          genre: "Cover Versions",
+          city: "SomaFM",
+          url: "https://ice6.somafm.com/covers-128-mp3",
+        },
+        {
+          freq: 94.3,
+          call: "Digitalis",
+          genre: "IDM / Leftfield",
+          city: "SomaFM",
+          url: "https://ice6.somafm.com/digitalis-128-mp3",
+        },
+        {
+          freq: 95.1,
+          call: "Indie Pop Rocks",
+          genre: "Indie Rock",
+          city: "SomaFM",
+          url: "https://ice6.somafm.com/indiepop-128-mp3",
+        },
+        {
+          freq: 95.9,
+          call: "DEF CON Radio",
+          genre: "Electronic / Hacker",
+          city: "SomaFM",
+          url: "https://ice6.somafm.com/defcon-128-mp3",
+        },
+        {
+          freq: 96.7,
+          call: "Folk Forward",
+          genre: "Folk / Singer-Song",
+          city: "SomaFM",
+          url: "https://ice6.somafm.com/folkfwd-128-mp3",
+        },
+        {
+          freq: 97.5,
+          call: "Metal Detector",
+          genre: "Heavy Metal",
+          city: "SomaFM",
+          url: "https://ice6.somafm.com/metal-128-mp3",
+        },
+        {
+          freq: 98.3,
+          call: "Radio Paradise",
+          genre: "Eclectic Rock",
+          city: "Paradise, CA",
+          url: "https://stream.radioparadise.com/mp3-128",
+        },
+        {
+          freq: 99.1,
+          call: "cliqhop idm",
+          genre: "Click Hop / IDM",
+          city: "SomaFM",
+          url: "https://ice6.somafm.com/cliqhop-128-mp3",
+        },
+        {
+          freq: 99.9,
+          call: "Boot Liquor",
+          genre: "Americana / Country",
+          city: "SomaFM",
+          url: "https://ice6.somafm.com/bootliquor-128-mp3",
+        },
+        {
+          freq: 100.7,
+          call: "Illinois Street",
+          genre: "Soulful House",
+          city: "SomaFM",
+          url: "https://ice6.somafm.com/illstreet-128-mp3",
+        },
+        {
+          freq: 101.5,
+          call: "Sonic Universe",
+          genre: "Jazz / Fusion",
+          city: "SomaFM",
+          url: "https://ice6.somafm.com/sonicuniverse-128-mp3",
+        },
+        {
+          freq: 102.3,
+          call: "Jazz & Blues",
+          genre: "Jazz / Blues",
+          city: "SomaFM",
+          url: "https://ice6.somafm.com/jazzandblues-128-mp3",
+        },
+        {
+          freq: 103.1,
+          call: "The Trip",
+          genre: "Global Psychedelic",
+          city: "SomaFM",
+          url: "https://ice6.somafm.com/thetrip-128-mp3",
+        },
+        {
+          freq: 103.9,
+          call: "Underground 70s",
+          genre: "Progressive Rock 70s",
+          city: "SomaFM",
+          url: "https://ice6.somafm.com/seventies-128-mp3",
+        },
+        {
+          freq: 104.7,
+          call: "Suburbs of Goa",
+          genre: "Psychedelic Trance",
+          city: "SomaFM",
+          url: "https://ice6.somafm.com/suburbsofgoa-128-mp3",
+        },
+        {
+          freq: 105.5,
+          call: "Fluid",
+          genre: "Liquid Drum & Bass",
+          city: "SomaFM",
+          url: "https://ice6.somafm.com/fluid-128-mp3",
+        },
+        {
+          freq: 106.3,
+          call: "Deep Space One",
+          genre: "Deep Space Ambient",
+          city: "SomaFM",
+          url: "https://ice6.somafm.com/deepspaceone-128-mp3",
+        },
+        {
+          freq: 107.1,
+          call: "Dub Step Beyond",
+          genre: "Dubstep / Bass",
+          city: "SomaFM",
+          url: "https://ice6.somafm.com/dubstep-128-mp3",
+        },
+      ];
+
+      STATIONS.sort((a, b) => a.freq - b.freq);
+      const FMIN = STATIONS[0].freq - 1.2;
+      const FMAX = STATIONS[STATIONS.length - 1].freq + 1.2;
+      const FRANGE = FMAX - FMIN;
+
+      // ── State ──
+      const audio = document.getElementById("audio");
+      let actx = null,
+        gainNode = null,
+        trebleNode = null,
+        mediaSrc = null;
+      let currentSt = null;
+      let tuneRatio = 0.35;
+      let loadTimer = null;
+      let noiseTimer = null;
+
+      // ── Build grille ──
+      const grilleEl = document.getElementById("grille");
+      for (let i = 0; i < 108; i++) {
+        const d = document.createElement("div");
+        d.className = "ghole";
+        d.style.setProperty("--gd", 0.3 + Math.random() * 0.7 + "s");
+        d.style.setProperty("--gdl", Math.random() * 0.5 + "s");
+        grilleEl.appendChild(d);
+      }
+
+      // ── Build signal bars ──
+      [8, 12, 16, 20, 24].forEach((h) => {
+        const b = document.createElement("div");
+        b.className = "sbar";
+        b.style.height = h + "px";
+        document.getElementById("sigbars").appendChild(b);
+      });
+
+      // ── Build wave viz ──
+      for (let i = 0; i < 8; i++) {
+        const b = document.createElement("div");
+        b.className = "wbar";
+        b.style.setProperty("--d", 0.25 + Math.random() * 0.5 + "s");
+        b.style.setProperty("--dl", Math.random() * 0.4 + "s");
+        b.style.height = 10 + Math.random() * 16 + "px";
+        document.getElementById("waveviz").appendChild(b);
+      }
+
+      // ── Build scale ──
+      function buildScale() {
+        const tape = document.getElementById("scaleTape");
+        const wrap = document.getElementById("scaleWrap");
+        const W = wrap.offsetWidth || 580;
+        const TW = W * 3; // tape is 3× wider than viewport
+        tape.style.width = TW + "px";
+        tape.innerHTML = "";
+
+        for (
+          let f = FMIN;
+          f <= FMAX + 0.01;
+          f = Math.round((f + 0.2) * 10) / 10
+        ) {
+          const x = ((f - FMIN) / FRANGE) * TW;
+          const isWhole = Math.abs(f - Math.round(f)) < 0.05;
+          const isHalf = Math.abs(f * 2 - Math.round(f * 2)) < 0.05;
+
+          const mark = document.createElement("div");
+          mark.className = "smark";
+          mark.style.left = x + "px";
+
+          const line = document.createElement("div");
+          line.className =
+            "sline " + (isWhole ? "maj" : isHalf ? "mid" : "min");
+          mark.appendChild(line);
+
+          if (isWhole) {
+            const lbl = document.createElement("div");
+            lbl.className = "slabel";
+            lbl.textContent = Math.round(f);
+            mark.appendChild(lbl);
+          }
+          tape.appendChild(mark);
+        }
+
+        // Station dots
+        STATIONS.forEach((st) => {
+          const x = ((st.freq - FMIN) / FRANGE) * TW;
+          const dot = document.createElement("div");
+          dot.className = "sdot";
+          dot.dataset.freq = st.freq;
+          dot.style.left = x + "px";
+          dot.title = `${st.call} · ${st.freq} FM`;
+          dot.addEventListener("click", () => tuneToStation(st));
+          tape.appendChild(dot);
+
+          // Station name label on scale
+          const nameLbl = document.createElement("div");
+          nameLbl.className = "sname";
+          nameLbl.id = "sname-" + st.freq;
+          nameLbl.textContent = st.call;
+          nameLbl.style.left = x + "px";
+          tape.appendChild(nameLbl);
+        });
+
+        scrollTape(tuneRatio);
+        refreshModalActive();
+      }
+
+      function scrollTape(ratio) {
+        const wrap = document.getElementById("scaleWrap");
+        const tape = document.getElementById("scaleTape");
+        const W = wrap.offsetWidth || 580;
+        const TW = W * 3;
+        const offset = ratio * TW - W / 2;
+        tape.style.transform = `translateX(${-offset}px)`;
+
+        // active dot
+        document
+          .querySelectorAll(".sdot")
+          .forEach((d) => d.classList.remove("active"));
+        document
+          .querySelectorAll(".sname")
+          .forEach((n) => n.classList.remove("cur"));
+        if (currentSt) {
+          const ad = document.querySelector(
+            `.sdot[data-freq="${currentSt.freq}"]`,
+          );
+          if (ad) ad.classList.add("active");
+          const nl = document.getElementById("sname-" + currentSt.freq);
+          if (nl) nl.classList.add("cur");
+        }
+      }
+
+      // ── Display ──
+      function showStation(st) {
+        document.getElementById("dfreq").textContent = st.freq.toFixed(1);
+        document.getElementById("dcall").textContent = st.call;
+        document.getElementById("dgenre").textContent = st.genre;
+        document.getElementById("dcity").textContent = st.city;
+        document.getElementById("mqtext").textContent =
+          `· · · ${st.call.toUpperCase()} · ${st.freq} FM · ${st.genre.toUpperCase()} · ${st.city.toUpperCase()} · · ·`;
+      }
+
+      function showFreq(freq) {
+        document.getElementById("dfreq").textContent = freq.toFixed(1);
+        document.getElementById("vTune").textContent = freq.toFixed(1);
+      }
+
+      function setSignal(n) {
+        document
+          .querySelectorAll(".sbar")
+          .forEach((b, i) => b.classList.toggle("lit", i < n));
+      }
+
+      function setPlaying(on) {
+        document.getElementById("onair").className =
+          "onair" + (on ? " live" : " off");
+        document
+          .querySelectorAll(".wbar")
+          .forEach((b) => b.classList.toggle("on", on));
+        document
+          .querySelectorAll(".ghole")
+          .forEach((b) => b.classList.toggle("pulse", on));
+        // lamp
+        const lamp = document.getElementById("lamp");
+        if (lamp) lamp.className = "lamp" + (on ? " on" : " idle");
+        // transport
+        updateTransportButtons(on);
+        // vinyl
+        const disc = document.getElementById("vinylDisc");
+        const arm = document.getElementById("tonearm");
+        if (disc) disc.classList.toggle("spinning", on);
+        if (arm) arm.classList.toggle("on", on);
+        // vinyl sound
+        if (on) {
+          if (actx) startVinylCrackle();
+        } else stopVinylCrackle();
+      }
+
+      function setLoading(on) {
+        document.getElementById("loadbar").classList.toggle("show", on);
+      }
+
+      function nearest(freq) {
+        let best = null,
+          bd = Infinity;
+        STATIONS.forEach((st) => {
+          const d = Math.abs(st.freq - freq);
+          if (d < bd) {
+            bd = d;
+            best = st;
+          }
+        });
+        return bd < 0.38 ? best : null;
+      }
+
+      // ── Web Audio ──
+      function ensureAudio() {
+        if (actx) return;
+        actx = new (window.AudioContext || window.webkitAudioContext)();
+        gainNode = actx.createGain();
+        gainNode.gain.value = 0.75;
+        trebleNode = actx.createBiquadFilter();
+        trebleNode.type = "highshelf";
+        trebleNode.frequency.value = 4000;
+        trebleNode.gain.value = 0;
+        gainNode.connect(trebleNode);
+        trebleNode.connect(actx.destination);
+        buildVinylNoise();
+      }
+
+      // ── Vinyl crackle engine ──
+      let vinylGain = null;
+      let vinylPlaying = false;
+      let crackleTimeout = null;
+
+      function buildVinylNoise() {
+        const bufSize = actx.sampleRate * 2;
+        const buf = actx.createBuffer(1, bufSize, actx.sampleRate);
+        const data = buf.getChannelData(0);
+        // Pink noise (Kellett approximation)
+        let b0 = 0,
+          b1 = 0,
+          b2 = 0,
+          b3 = 0,
+          b4 = 0,
+          b5 = 0,
+          b6 = 0;
+        for (let i = 0; i < bufSize; i++) {
+          const wh = Math.random() * 2 - 1;
+          b0 = 0.99886 * b0 + wh * 0.0555179;
+          b1 = 0.99332 * b1 + wh * 0.0750759;
+          b2 = 0.969 * b2 + wh * 0.153852;
+          b3 = 0.8665 * b3 + wh * 0.3104856;
+          b4 = 0.55 * b4 + wh * 0.5329522;
+          b5 = -0.7616 * b5 - wh * 0.016898;
+          data[i] = (b0 + b1 + b2 + b3 + b4 + b5 + b6 + wh * 0.5362) * 0.11;
+          b6 = wh * 0.115926;
+        }
+        const src = actx.createBufferSource();
+        src.buffer = buf;
+        src.loop = true;
+
+        const lp = actx.createBiquadFilter();
+        lp.type = "lowpass";
+        lp.frequency.value = 3800;
+        lp.Q.value = 0.5;
+        const hp = actx.createBiquadFilter();
+        hp.type = "highpass";
+        hp.frequency.value = 260;
+        hp.Q.value = 0.4;
+
+        vinylGain = actx.createGain();
+        vinylGain.gain.value = 0;
+
+        src.connect(hp);
+        hp.connect(lp);
+        lp.connect(vinylGain);
+        vinylGain.connect(actx.destination);
+        src.start();
+      }
+
+      function startVinylCrackle() {
+        if (vinylPlaying) return;
+        vinylPlaying = true;
+        if (vinylGain)
+          vinylGain.gain.setTargetAtTime(0.055, actx.currentTime, 0.5);
+        scheduleCrackle();
+      }
+
+      function stopVinylCrackle() {
+        vinylPlaying = false;
+        if (vinylGain) vinylGain.gain.setTargetAtTime(0, actx.currentTime, 0.8);
+        clearTimeout(crackleTimeout);
+      }
+
+      function scheduleCrackle() {
+        if (!vinylPlaying) return;
+        fireCrackle();
+        crackleTimeout = setTimeout(
+          scheduleCrackle,
+          500 + Math.random() * 2500,
+        );
+      }
+
+      function fireCrackle() {
+        if (!actx || !vinylPlaying) return;
+        const len = Math.floor(
+          actx.sampleRate * (0.008 + Math.random() * 0.018),
+        );
+        const cBuf = actx.createBuffer(1, len, actx.sampleRate);
+        const cd = cBuf.getChannelData(0);
+        for (let i = 0; i < len; i++) {
+          const env = Math.pow(1 - i / len, 2.8);
+          cd[i] =
+            (Math.random() * 2 - 1) * env * (Math.random() > 0.4 ? 1 : 0.25);
+        }
+        const cSrc = actx.createBufferSource();
+        cSrc.buffer = cBuf;
+        const cf = actx.createBiquadFilter();
+        cf.type = "bandpass";
+        cf.frequency.value = 1800 + Math.random() * 2200;
+        cf.Q.value = 0.9;
+        const cg = actx.createGain();
+        cg.gain.value = 0.15 + Math.random() * 0.28;
+        cSrc.connect(cf);
+        cf.connect(cg);
+        cg.connect(actx.destination);
+        cSrc.start();
+      }
+
+      function connectAudio() {
+        // Only create MediaElementSource once per audio element
+        if (!mediaSrc) {
+          mediaSrc = actx.createMediaElementSource(audio);
+          mediaSrc.connect(gainNode);
+        }
+      }
+
+      // ── Play station ──
+      function playStation(st) {
+        if (currentSt === st) return;
+        currentSt = st;
+
+        ensureAudio();
+        if (actx.state === "suspended") actx.resume();
+
+        // Stop old stream
+        audio.pause();
+        audio.removeAttribute("src");
+        audio.load();
+
+        setPlaying(false);
+        setSignal(0);
+        setLoading(true);
+        showStation(st);
+
+        // IMPORTANT: set crossOrigin BEFORE src
+        audio.crossOrigin = "anonymous";
+        audio.src = st.url;
+        audio.volume = 1; // gain controlled by gainNode
+
+        connectAudio();
+
+        audio
+          .play()
+          .then(() => {
+            setLoading(false);
+            setPlaying(true);
+            // Animate signal bars
+            let s = 0;
+            const iv = setInterval(() => {
+              setSignal(++s);
+              if (s >= 4) clearInterval(iv);
+            }, 180);
+          })
+          .catch((err) => {
+            console.warn(st.call, err.message);
+            setLoading(false);
+            setSignal(1);
+            document.getElementById("dcall").textContent =
+              st.call + " — NO SIGNAL";
+            document.getElementById("dgenre").textContent =
+              "Try another station";
+          });
+      }
+
+      // ── Tune to station (from dot click) ──
+      function tuneToStation(st) {
+        tuneRatio = (st.freq - FMIN) / FRANGE;
+        const angle = tuneRatio * 260 - 130;
+        setKnobAngle("dTune", angle, "kTune");
+        document.getElementById("vTune").textContent = st.freq.toFixed(1);
+        scrollTape(tuneRatio);
+        showFreq(st.freq);
+        clearTimeout(loadTimer);
+        playStation(st);
+        refreshModalActive();
+      }
+
+      // ── KNOBS ──
+      function setKnobAngle(dotId, angle, knobId) {
+        const k = document.getElementById(knobId);
+        const isBig = k.classList.contains("big");
+        const R = isBig ? 44 : 32;
+        const H = isBig ? 18 : 14;
+        const top = isBig ? 9 : 7;
+        document.getElementById(dotId).style.transform =
+          `translateX(-50%) rotate(${angle}deg)`;
+      }
+
+      function makeKnob(knobId, dotId, valId, onchange) {
+        const el = document.getElementById(knobId);
+        let dragging = false,
+          startY = 0,
+          startAngle = 0;
+
+        function curAngle() {
+          const m = (
+            document.getElementById(dotId).style.transform || ""
+          ).match(/rotate\(([^d]+)deg\)/);
+          return m ? parseFloat(m[1]) : 0;
+        }
+
+        function apply(angle) {
+          angle = Math.max(-130, Math.min(130, angle));
+          document.getElementById(dotId).style.transform =
+            `translateX(-50%) rotate(${angle}deg)`;
+          onchange(angle);
+        }
+
+        el.addEventListener("mousedown", (e) => {
+          dragging = true;
+          startY = e.clientY;
+          startAngle = curAngle();
+          window.addEventListener("mousemove", mm);
+          window.addEventListener("mouseup", mu);
+          e.preventDefault();
+        });
+        el.addEventListener(
+          "touchstart",
+          (e) => {
+            dragging = true;
+            startY = e.touches[0].clientY;
+            startAngle = curAngle();
+            window.addEventListener("touchmove", tm, { passive: false });
+            window.addEventListener("touchend", tu);
+            e.preventDefault();
+          },
+          { passive: false },
+        );
+
+        function mm(e) {
+          if (!dragging) return;
+          apply(startAngle + (startY - e.clientY) * 1.4);
+        }
+        function mu() {
+          dragging = false;
+          window.removeEventListener("mousemove", mm);
+          window.removeEventListener("mouseup", mu);
+        }
+        function tm(e) {
+          if (!dragging) return;
+          apply(startAngle + (startY - e.touches[0].clientY) * 1.4);
+          e.preventDefault();
+        }
+        function tu() {
+          dragging = false;
+          window.removeEventListener("touchmove", tm);
+          window.removeEventListener("touchend", tu);
+        }
+
+        el.addEventListener(
+          "wheel",
+          (e) => {
+            apply(curAngle() - e.deltaY * 0.35);
+            e.preventDefault();
+          },
+          { passive: false },
+        );
+      }
+
+      // Volume knob
+      makeKnob("kVol", "dVol", "vVol", (angle) => {
+        const v = (angle + 130) / 260; // 0..1
+        document.getElementById("vVol").textContent = Math.round(v * 100);
+        if (gainNode) gainNode.gain.setTargetAtTime(v, actx.currentTime, 0.04);
+      });
+
+      // Tuning knob
+      makeKnob("kTune", "dTune", "vTune", (angle) => {
+        const ratio = (angle + 130) / 260;
+        tuneRatio = Math.max(0, Math.min(1, ratio));
+        const freq = FMIN + tuneRatio * FRANGE;
+        showFreq(freq);
+        scrollTape(tuneRatio);
+
+        const st = nearest(freq);
+        clearTimeout(loadTimer);
+        if (st) {
+          loadTimer = setTimeout(() => playStation(st), 500);
+        } else {
+          // between stations — stop
+          if (currentSt) {
+            currentSt = null;
+            audio.pause();
+            setPlaying(false);
+            setSignal(0);
+            setLoading(false);
+            document.getElementById("dcall").textContent = "SCANNING...";
+            document.getElementById("dgenre").textContent = "· · · · · · · ·";
+            document.getElementById("dcity").textContent = "";
+            document
+              .querySelectorAll(".sdot")
+              .forEach((d) => d.classList.remove("active"));
+          }
+        }
+      });
+
+      // Treble knob
+      makeKnob("kTreb", "dTreb", "vTreb", (angle) => {
+        const v = (angle + 130) / 260;
+        document.getElementById("vTreb").textContent = Math.round(v * 100);
+        if (trebleNode)
+          trebleNode.gain.setTargetAtTime(
+            (v - 0.5) * 20,
+            actx.currentTime,
+            0.04,
+          );
+      });
+
+      // ── Play / Pause transport buttons ──
+      function updateTransportButtons(playing) {
+        document.getElementById("btnPlay").classList.toggle("active", playing);
+        document
+          .getElementById("btnPause")
+          .classList.toggle("active", !playing && !!currentSt);
+      }
+
+      function handlePlay() {
+        if (currentSt) {
+          ensureAudio();
+          if (actx.state === "suspended") actx.resume();
+          connectAudio();
+          audio
+            .play()
+            .then(() => {
+              setLoading(false);
+              setPlaying(true);
+              updateTransportButtons(true);
+              let s = 0;
+              const iv = setInterval(() => {
+                setSignal(++s);
+                if (s >= 4) clearInterval(iv);
+              }, 180);
+            })
+            .catch((err) => console.warn("Play error:", err.message));
+        }
+      }
+
+      function handlePause() {
+        if (!audio.paused) {
+          audio.pause();
+          setPlaying(false);
+          updateTransportButtons(false);
+        }
+      }
+
+      // ── Init ──
+      function init() {
+        buildScale();
+
+        // Set initial knob angles
+        const vA = 0.75 * 260 - 130; // volume 75%
+        document.getElementById("dVol").style.transform =
+          `translateX(-50%) rotate(${vA}deg)`;
+        document.getElementById("vVol").textContent = "75";
+
+        const tA = tuneRatio * 260 - 130;
+        document.getElementById("dTune").style.transform =
+          `translateX(-50%) rotate(${tA}deg)`;
+
+        document.getElementById("dTreb").style.transform =
+          `translateX(-50%) rotate(0deg)`;
+        document.getElementById("vTreb").textContent = "50";
+        loadCustomStations();
+      }
+
+      // ── STATION LIST MODAL ──
+      function buildModal() {
+        const scroll = document.getElementById("modalScroll");
+        scroll.innerHTML = "";
+        STATIONS.forEach((st) => {
+          const row = document.createElement("div");
+          row.className = "strow" + (currentSt === st ? " active" : "");
+          const delBtn = st.custom
+            ? `<button class="strow-del" title="Remove" onclick="deleteStation(${st.freq}, event)">✕</button>`
+            : `<button class="strow-del hidden"></button>`;
+          row.innerHTML = `
+      <div class="strow-freq">${st.freq.toFixed(1)}</div>
+      <div class="strow-info">
+        <div class="strow-call">${st.call}${st.custom ? ' <span style="font-size:9px;opacity:.5;letter-spacing:1px;">CUSTOM</span>' : ''}</div>
+        <div class="strow-genre">${st.genre}</div>
+        <div class="strow-city">${st.city}</div>
+      </div>
+      <div class="strow-dot"></div>${delBtn}`;
+          row.querySelector('.strow-freq, .strow-info, .strow-dot').parentElement.addEventListener("click", (e) => {
+            if (e.target.classList.contains('strow-del')) return;
+            tuneToStation(st);
+            toggleModal();
+          });
+          row.addEventListener("click", (e) => {
+            if (e.target.classList.contains('strow-del')) return;
+            tuneToStation(st);
+            toggleModal();
+          });
+          scroll.appendChild(row);
+        });
+      }
+
+      function refreshModalActive() {
+        document.querySelectorAll(".strow").forEach((row, i) => {
+          row.classList.toggle("active", STATIONS[i] === currentSt);
+        });
+      }
+
+      function toggleModal() {
+        const ov = document.getElementById("modalOverlay");
+        const isOpen = ov.classList.contains("open");
+        if (!isOpen) {
+          buildModal();
+        }
+        ov.classList.toggle("open");
+      }
+
+      function closeModalIfBg(e) {
+        if (e.target === document.getElementById("modalOverlay")) toggleModal();
+      }
+
+      // Close on Escape
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape")
+          document.getElementById("modalOverlay").classList.remove("open");
+      });
+
+      window.addEventListener("load", init);
+      window.addEventListener("resize", () => {
+        buildScale();
+      });
+
+      // Resume AudioContext on first user interaction (browser policy)
+      document.addEventListener(
+        "click",
+        () => {
+          if (actx && actx.state === "suspended") actx.resume();
+        },
+        { once: false },
+      );
+    </script>
+  </body>
+</html>
